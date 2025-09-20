@@ -97,6 +97,7 @@ private:
         inline static const std::vector<rgl_field_t> rglFields = {
                 RGL_FIELD_XYZ_VEC3_F32,
                 RGL_FIELD_LASER_RETRO_F32
+                RGL_FIELD_TIME_STAMP_U32
         };
     } resultPointCloud{};
 

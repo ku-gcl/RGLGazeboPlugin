@@ -321,7 +321,8 @@ gz::msgs::PointCloudPacked RGLServerPluginInstance::CreatePointCloudMsg(std::chr
     gz::msgs::PointCloudPacked outMsg;
     gz::msgs::InitPointCloudPacked(outMsg, frame, false,
                                          {{"xyz", gz::msgs::PointCloudPacked::Field::FLOAT32},
-                                          {"intensity",gz::msgs::PointCloudPacked::Field::FLOAT32}});
+                                          {"intensity",gz::msgs::PointCloudPacked::Field::FLOAT32}
+                                          {"t", gz::msgs::PointCloudPacked::Field::UINT32}});
     outMsg.mutable_data()->resize(resultPointCloud.hitPointCount * outMsg.point_step());
     *outMsg.mutable_header()->mutable_stamp() = gz::msgs::Convert(simTime);
     outMsg.set_height(1);
