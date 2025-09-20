@@ -146,7 +146,8 @@
             <update_on_paused_sim>false</update_on_paused_sim>
             <topic>rgl_lidar</topic>
             <frame>RGLLidar</frame>
-            <pattern_uniform>
+            <pattern_preset>Livox Mid360</pattern_preset>
+            <!-- <pattern_uniform>
               <horizontal>
                 <samples>1800</samples>
                 <min_angle>-3.14159</min_angle>
@@ -157,7 +158,7 @@
                 <min_angle>-0.436332</min_angle>
                 <max_angle>0.261799</max_angle>
               </vertical>
-            </pattern_uniform>
+            </pattern_uniform> -->
           </plugin>
         </sensor>
         <collision name='lidar_collision'>

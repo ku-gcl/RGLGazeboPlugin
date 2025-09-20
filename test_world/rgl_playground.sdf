@@ -25,6 +25,65 @@
       <shadows>true</shadows>
     </scene>
 
+    <gui fullscreen='false'>
+      <plugin name='3D View' filename='GzScene3D'>
+        <ignition-gui>
+          <title>3D View</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='string' key='state'>docked</property>
+        </ignition-gui>
+        <engine>ogre2</engine>
+        <scene>scene</scene>
+        <ambient_light>0.4 0.4 0.4</ambient_light>
+        <background_color>0.5 0.8 0.95</background_color>
+        <camera_follow>
+          <target>prius_hybrid</target>
+          <p_gain>0.5</p_gain>
+          <offset>100 100 100</offset>
+        </camera_follow>
+      </plugin>
+      <plugin name='World control' filename='WorldControl'>
+        <ignition-gui>
+          <title>World control</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='bool' key='resizable'>false</property>
+          <property type='double' key='height'>72</property>
+          <property type='double' key='width'>121</property>
+          <property type='double' key='z'>1</property>
+          <property type='string' key='state'>floating</property>
+          <anchors target='3D View'>
+            <line own='left' target='left'/>
+            <line own='bottom' target='bottom'/>
+          </anchors>
+        </ignition-gui>
+        <play_pause>true</play_pause>
+        <step>true</step>
+        <start_paused>true</start_paused>
+      </plugin>
+      <plugin name='World stats' filename='WorldStats'>
+        <ignition-gui>
+          <title>World stats</title>
+          <property type='bool' key='showTitleBar'>false</property>
+          <property type='bool' key='resizable'>false</property>
+          <property type='double' key='height'>110</property>
+          <property type='double' key='width'>290</property>
+          <property type='double' key='z'>1</property>
+          <property type='string' key='state'>floating</property>
+          <anchors target='3D View'>
+            <line own='right' target='right'/>
+            <line own='bottom' target='bottom'/>
+          </anchors>
+        </ignition-gui>
+        <sim_time>true</sim_time>
+        <real_time>true</real_time>
+        <real_time_factor>true</real_time_factor>
+        <iterations>true</iterations>
+      </plugin>
+      <plugin name='rgl::RGLVisualize' filename='RGLVisualize'>
+        <point_cloud_topic>rgl_lidar/world</point_cloud_topic>
+      </plugin>
+    </gui>
+
     <model name='ground_plane'>
       <static>true</static>
       <link name='link'>
@@ -90,7 +149,8 @@
             <update_on_paused_sim>false</update_on_paused_sim>
             <topic>rgl_lidar</topic>
             <frame>RGLLidar</frame>
-            <pattern_preset>Alpha Prime</pattern_preset>
+            <!-- <pattern_preset>Alpha Prime</pattern_preset> -->
+            <pattern_preset>Livox Mid360</pattern_preset>
           </plugin>
         </sensor>
         <inertial>
