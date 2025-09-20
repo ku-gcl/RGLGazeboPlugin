@@ -331,6 +331,22 @@ gz::msgs::PointCloudPacked RGLServerPluginInstance::CreatePointCloudMsg(std::chr
 
     gz::msgs::PointCloudPackedIterator<float> xIter(outMsg, "x");
     memcpy(&(*xIter), resultPointCloud.data.data(), resultPointCloud.hitPointCount * resultPointCloud.pointSize);
+
+    gz::msgs::PointCloudPackedIterator<uint32_t> tIter(outMsg, "t");
+    const double scanPeriod_us = static_cast<double>(raytraceIntervalTime.count());
+    const int n = resultPointCloud.hitPointCount;
+
+    if (n <= 1 || scanPeriod_us <= 0.0) {
+        // 点が1つ以下 or 周期不明なら 0 で埋める（安全策）
+        for (int i = 0; i < n; ++i) tIter[i] = 0u;
+    } else {
+        for (int i = 0; i < n; ++i) {
+            const double frac = static_cast<double>(i) / static_cast<double>(n - 1);
+            const double t_us = frac * scanPeriod_us;
+            tIter[i] = static_cast<uint32_t>(t_us + 0.5); // 丸め
+        }
+    }
+
     return outMsg;
 }
 
